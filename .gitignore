@@ -1,0 +1,33 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+*.tsbuildinfo
+vite.config.*.timestamp-*
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Configuração local
+*.local
+*.local.json
+docker-compose.override.yml
+
+# Testes
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Logs
+*.log
+
+# Editor e sistema operacional
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db

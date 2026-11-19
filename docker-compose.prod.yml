@@ -1,0 +1,64 @@
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+      - BACK_HOST=back
+      - ACME_EMAIL=${ACME_EMAIL}
+    depends_on:
+      back:
+        condition: service_healthy
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:80/ || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  back:
+    image: ${BACK_IMAGE}
+    restart: unless-stopped
+    # Nenhuma porta publicada ao público (RNF-010)
+    expose:
+      - "8080"
+    environment:
+      - PORT=8080
+      - DOMAIN=${DOMAIN}
+      - PUBLIC_BASE_URL=https://${DOMAIN}
+      - ALLOWED_ORIGINS=https://${DOMAIN}
+      - TRUSTED_PROXY=true
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8080/api/v1/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    networks:
+      - internal-net
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+networks:
+  internal-net:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

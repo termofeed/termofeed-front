@@ -1,0 +1,46 @@
+{
+  "name": "termofeed-front",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.mjs",
+    "build": "tsc && vite build --config vite.config.mjs",
+    "preview": "vite preview --config vite.config.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --config vite.config.mjs",
+    "test:watch": "vitest --config vite.config.mjs",
+    "test:coverage": "vitest run --coverage --config vite.config.mjs",
+    "test:e2e": "playwright test",
+    "generate:api": "openapi-typescript ../termofeed-specs/cnt/openapi.yaml -o src/api/generated-types.ts"
+  },
+  "dependencies": {
+    "@fontsource/fredoka": "^5.1.0",
+    "@fontsource/space-grotesk": "^5.1.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "jsdom": "^25.0.1",
+    "openapi-typescript": "^7.4.3",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
+  }
+}

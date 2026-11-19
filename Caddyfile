@@ -1,0 +1,38 @@
+{$DOMAIN:localhost} {
+  # E-mail para certificado ACME em produção (se fornecido)
+  {$ACME_EMAIL_DIRECTIVE}
+
+  # Compressão zstd e gzip
+  encode zstd gzip
+
+  # Raiz dos arquivos estáticos
+  root * /usr/share/caddy
+
+  # Cabeçalhos de segurança
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    Referrer-Policy "no-referrer"
+    Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' ws: wss:; frame-ancestors 'none';"
+  }
+
+  # Cache imutável para assets com hash
+  @assets path /assets/*
+  header @assets Cache-Control "public, max-age=31536000, immutable"
+
+  # Sem cache para index.html e manifest
+  @html path / /index.html /manifest.webmanifest
+  header @html Cache-Control "no-cache, no-store, must-revalidate"
+
+  # Encaminha chamadas de API e WebSocket para o back-end
+  handle /api/* {
+    reverse_proxy {$BACK_HOST:back}:8080
+  }
+
+  # Serve arquivos estáticos e redireciona rotas SPA para index.html
+  handle {
+    try_files {path} /index.html
+    file_server
+  }
+}

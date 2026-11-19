@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="bulb-grad" x1="50" y1="90" x2="50" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#E8442F" />
+      <stop offset="100%" stopColor="#FFB627" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="#FFF6EA" stroke="#1B2340" stroke-width="5" />
+  <rect x="42" y="16" width="16" height="42" rx="8" fill="#FFFFFF" stroke="#1B2340" stroke-width="4" />
+  <circle cx="50" cy="68" r="20" fill="#FFFFFF" stroke="#1B2340" stroke-width="4" />
+  <rect x="44" y="52" width="12" height="12" fill="#FFFFFF" />
+  <rect x="45" y="30" width="10" height="28" rx="5" fill="url(#bulb-grad)" />
+  <circle cx="50" cy="68" r="14" fill="url(#bulb-grad)" />
+  <circle cx="45" cy="66" r="2" fill="#1B2340" />
+  <circle cx="55" cy="66" r="2" fill="#1B2340" />
+  <path d="M46 72 Q50 76 54 72" stroke="#1B2340" stroke-width="2" stroke-linecap="round" fill="none" />
+</svg>

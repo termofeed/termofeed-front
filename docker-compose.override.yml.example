@@ -1,0 +1,9 @@
+# Exemplo de sobreposição para compilar o back-end localmente em vez da imagem remota:
+# Copie este arquivo para docker-compose.override.yml
+# cp docker-compose.override.yml.example docker-compose.override.yml
+
+services:
+  back:
+    build:
+      context: ../termofeed-back
+      dockerfile: Dockerfile
